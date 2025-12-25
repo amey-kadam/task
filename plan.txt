@@ -1,0 +1,5 @@
+1. Plan & Design (Database + Features + Routes)
+2. Backend Setup (Auth, Products, Orders, Cart)
+3. Test Backend with Postman
+4. Create Frontend Pages & Connect to API
+5. Add UI/UX + State Management
