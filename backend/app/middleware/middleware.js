@@ -1,4 +1,3 @@
-// middleware.js
 export function middleware(request) {
   const response = new Response(null, {
     headers: {
@@ -8,7 +7,7 @@ export function middleware(request) {
     },
   });
 
-  // Handle OPTIONS preflight request
+  
   if (request.method === "OPTIONS") {
     return response;
   }
@@ -17,5 +16,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: "/api/:path*", // apply to all /api routes
+  matcher: "/api/:path*", 
 };
