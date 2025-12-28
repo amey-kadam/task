@@ -1,7 +1,7 @@
 import { pool } from "@/app/lib/db";
 
 export async function GET(req, { params }) {
-  const { id } = params; // <-- No await needed
+  const { id } = await params;
 
   const result = await pool.query("SELECT * FROM products WHERE id = $1", [id]);
 

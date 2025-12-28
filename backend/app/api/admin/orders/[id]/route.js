@@ -5,7 +5,7 @@ export async function GET(req, { params }) {
   const check = verifyAdmin(req);
   if (check.error) return Response.json({ error: check.error }, { status: check.status });
 
-  const { id } = params; // <-- this is correct
+  const { id } = await params;
 
   const order = await pool.query(
     `SELECT 
