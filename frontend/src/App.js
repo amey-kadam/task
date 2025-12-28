@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import Register from "./pages/RegisterComponent";
+import Home from "./pages/Home";
 
 function App() {
-  const [data, setData] = useState("");
-
-  useEffect(() => {
-    fetch("http://localhost:3000/api")
-      .then(res => res.json())
-      .then(data => setData(data.message));
-  }, []);
-
-  return <h1>{data}</h1>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
