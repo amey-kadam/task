@@ -13,7 +13,7 @@ export async function POST(req) {
     const valid = await bcrypt.compare(password, user.password);
     if (!valid) return Response.json({ error: "Invalid password" }, { status: 401 });
 
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+    const token = jwt.sign({ id: user.id, role: user.role },process.env.JWT_SECRET,{ expiresIn: "7d" });
 
     return Response.json({ message: "Login successful", token }, { status: 200 });
 }
