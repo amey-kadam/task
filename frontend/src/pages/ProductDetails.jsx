@@ -15,24 +15,27 @@ const ProductDetails = () => {
   }, [id]);
 
   const handleAddToCart = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      alert("Please login first");
-      return navigate("/login");
-    }
+  const token = localStorage.getItem("token");
 
-    try {
-      await API.post(
-        "/cart/add", 
-        { product_id: id, quantity: 1 },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      setMessage("Added to cart!");
-    } catch (error) {
-      setMessage("Failed to add to cart");
-      console.error(error);
-    }
-  };
+  if (!token) {
+    alert("Please login to add items to cart.");
+    return navigate("/login");
+  }
+
+  try {
+    await API.post(
+      "/cart/add",
+      { product_id: id, quantity: 1 },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    setMessage("Product added to cart!");
+  } catch (error) {
+    alert("You must be logged in to add to cart.");
+    navigate("/login");
+  }
+};
+
 
   if (!product) return <h2>Loading...</h2>;
 

@@ -3,8 +3,16 @@ import jwt from "jsonwebtoken";
 
 export async function POST(req) {
   const authHeader = req.headers.get("authorization");
+  if (!authHeader) return Response.json({ error: "Login required" }, { status: 401 });
+
   const token = authHeader.split(" ")[1];
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  let decoded;
+  try {
+    decoded = jwt.verify(token, process.env.JWT_SECRET);
+  } catch (error) {
+    return Response.json({ error: "Invalid token" }, { status: 401 });
+  }
+
   const userId = decoded.id;
 
   const { item_id } = await req.json();

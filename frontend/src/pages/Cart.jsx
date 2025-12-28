@@ -7,12 +7,20 @@ const Cart = () => {
   const fetchCart = async () => {
     try {
       const token = localStorage.getItem("token");
+      if (!token) {
+        window.location.href = "/login";
+        return;
+      }
+
       const res = await API.get("/cart", {
         headers: { Authorization: `Bearer ${token}` }
       });
       setItems(res.data);
     } catch (error) {
       console.error("Failed to load cart");
+      if (error.response && error.response.status === 401) {
+        window.location.href = "/login";
+      }
     }
   };
 

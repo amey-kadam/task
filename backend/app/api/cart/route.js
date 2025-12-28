@@ -6,7 +6,15 @@ export async function GET(req) {
   if (!authHeader) return Response.json({ error: "No token provided" }, { status: 401 });
 
   const token = authHeader.split(" ")[1];
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  if (!token) return Response.json({ error: "No token provided" }, { status: 401 });
+
+  let decoded;
+  try {
+    decoded = jwt.verify(token, process.env.JWT_SECRET);
+  } catch (error) {
+    return Response.json({ error: "Invalid token" }, { status: 401 });
+  }
+
   const userId = decoded.id;
 
   const result = await pool.query(
