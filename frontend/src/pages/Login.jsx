@@ -1,8 +1,10 @@
 import { useState } from "react";
 import API from "../services/api";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
+  const { login } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,7 +14,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await API.post("/auth/login", { email, password });
-      localStorage.setItem("token", res.data.token); // store token
+      login(res.data.token);
       setMessage("Login successful!");
       navigate("/"); // redirect to homepage
     } catch (error) {
