@@ -7,6 +7,7 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import MyOrders from "./pages/MyOrders";
 import AllProducts from "./pages/AllProducts";
+import Profile from "./pages/Profile";
 
 
 import Navbar from "./components/Navbar";
@@ -27,6 +28,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/my-orders" element={<MyOrders />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
