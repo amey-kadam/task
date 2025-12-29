@@ -8,6 +8,7 @@ import Checkout from "./pages/Checkout";
 import MyOrders from "./pages/MyOrders";
 import AllProducts from "./pages/AllProducts";
 import Profile from "./pages/Profile";
+import Admin from "./pages/Admin";
 
 
 import Navbar from "./components/Navbar";
@@ -29,6 +30,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/my-orders" element={<MyOrders />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

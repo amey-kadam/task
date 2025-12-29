@@ -8,23 +8,26 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
+        const storedUser = localStorage.getItem("user");
         if (token) {
-            // ideally we would verify the token with the backend here
-            // for now we'll just assume presence of token = logged in
-            // and maybe decode it if it's a JWT to get user info, but we don't have a decoder handy
-            // so we'll just set a dummy user or true state
-            setUser({ token });
+            if (storedUser) {
+                setUser({ token, ...JSON.parse(storedUser) });
+            } else {
+                setUser({ token });
+            }
         }
         setLoading(false);
     }, []);
 
     const login = (token, userData) => {
         localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(userData));
         setUser({ token, ...userData });
     };
 
     const logout = () => {
         localStorage.removeItem("token");
+        localStorage.removeItem("user");
         setUser(null);
     };
 
